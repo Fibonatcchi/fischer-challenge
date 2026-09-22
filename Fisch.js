@@ -10,21 +10,21 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
-async function testSupabase() {
+async function challengeLaden() {
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("*");
+        .select("*")
+        .limit(1);
 
     if (error) {
-        console.error("Supabase Fehler:", error);
+        console.error("Fehler beim Laden der Challenge:", error);
         return;
     }
 
-    console.log("Supabase Verbindung funktioniert!");
-    console.log(data);
+    console.log("Challenge aus Supabase:", data[0]);
 }
 
-testSupabase();
+challengeLaden();
 
 const fischarten = [
     "Hecht",
