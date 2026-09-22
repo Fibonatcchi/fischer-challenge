@@ -1,0 +1,308 @@
+/* =========================
+   GRUNDLAYOUT
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e8f4f8;
+    color: #222;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background-color: #126782;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+}
+
+header p {
+    margin: 0;
+}
+
+
+/* =========================
+   HAUPTBEREICH
+========================= */
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+.bereich {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.bereich h2 {
+    margin-top: 0;
+}
+
+
+/* =========================
+   TEILNEHMER
+========================= */
+
+.teilnehmer-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.teilnehmer-button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #dceff5;
+    cursor: pointer;
+}
+
+.teilnehmer-button.aktiv {
+    background-color: #126782;
+    color: white;
+}
+
+.neuer-teilnehmer {
+    display: flex;
+    gap: 10px;
+}
+
+.neuer-teilnehmer input {
+    flex: 1;
+}
+
+
+/* =========================
+   INPUTS UND BUTTONS
+========================= */
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    padding: 11px 15px;
+    border-radius: 8px;
+    background-color: #126782;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   FORTSCHRITT
+========================= */
+
+.fortschritt-text {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.fortschritt-balken {
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#fortschrittBalken {
+    height: 100%;
+    width: 0%;
+    background-color: #49a85a;
+    transition: width 0.3s;
+}
+
+
+/* =========================
+   FISCHLISTE
+========================= */
+
+.fisch-liste {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.fisch {
+    background-color: #f5f5f5;
+    padding: 18px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+}
+
+.fisch.gefangen {
+    background-color: #d9f5dc;
+    border-color: #49a85a;
+}
+
+.fisch h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.status {
+    margin-bottom: 15px;
+}
+
+.eingabe {
+    display: none;
+    margin-top: 15px;
+}
+
+.eingabe input {
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   FANGDATEN
+========================= */
+
+.fang-info {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.fang-datum {
+    font-size: 13px;
+    color: #666;
+}
+
+.loeschen-button {
+    background-color: #b83232;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   RANGLISTE
+========================= */
+
+.ranglisten-eintrag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+}
+
+.rang {
+    font-weight: bold;
+}
+
+
+/* =========================
+   EINSTELLUNGEN
+========================= */
+
+.reset-button {
+    background-color: #b83232;
+    margin-left: 10px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark {
+    background-color: #172126;
+    color: #eee;
+}
+
+body.dark .bereich {
+    background-color: #243238;
+}
+
+body.dark .fisch {
+    background-color: #304047;
+}
+
+body.dark .fisch.gefangen {
+    background-color: #284d32;
+}
+
+body.dark .ranglisten-eintrag {
+    background-color: #304047;
+}
+
+body.dark input,
+body.dark select {
+    background-color: #304047;
+    color: white;
+    border-color: #667;
+}
+
+body.dark .teilnehmer-button {
+    background-color: #304047;
+    color: white;
+}
+
+body.dark .fang-datum {
+    color: #bbb;
+}
+
+
+/* =========================
+   HANDY
+========================= */
+
+@media (max-width: 600px) {
+
+    .fisch-liste {
+        grid-template-columns: 1fr;
+    }
+
+    .neuer-teilnehmer {
+        flex-direction: column;
+    }
+
+    .reset-button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+}

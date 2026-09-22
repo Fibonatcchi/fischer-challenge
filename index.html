@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fischer-Challenge</title>
+
+    <link rel="stylesheet" href="Fisch.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🎣 Fischer-Challenge</h1>
+        <p>Wer fängt die meisten verschiedenen Fischarten?</p>
+    </header>
+
+
+    <main>
+
+        <!-- Teilnehmer -->
+
+        <section class="bereich">
+
+            <h2>Teilnehmer</h2>
+
+            <div id="teilnehmerListe" class="teilnehmer-liste"></div>
+
+            <div class="neuer-teilnehmer">
+
+                <input
+                    type="text"
+                    id="teilnehmerInput"
+                    placeholder="Name eingeben"
+                >
+
+                <button id="teilnehmerHinzufuegen">
+                    Teilnehmer hinzufügen
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Aktueller Teilnehmer -->
+
+        <section class="bereich">
+
+            <h2>Aktiver Teilnehmer</h2>
+
+            <select id="teilnehmerAuswahl"></select>
+
+        </section>
+
+
+        <!-- Fortschritt -->
+
+        <section class="bereich fortschritt-bereich">
+
+            <h2>Fortschritt</h2>
+
+            <div class="fortschritt-text">
+
+                <span id="fortschrittText">
+                    0 von 0 Arten
+                </span>
+
+            </div>
+
+            <div class="fortschritt-balken">
+
+                <div id="fortschrittBalken"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Fischarten -->
+
+        <section class="bereich">
+
+            <h2>Fischarten</h2>
+
+            <div id="fischListe" class="fisch-liste"></div>
+
+        </section>
+
+
+        <!-- Rangliste -->
+
+        <section class="bereich">
+
+            <h2>🏆 Rangliste</h2>
+
+            <div id="rangliste"></div>
+
+        </section>
+
+
+        <!-- Einstellungen -->
+
+        <section class="bereich">
+
+            <h2>⚙️ Einstellungen</h2>
+
+            <button id="darkModeButton">
+                Dark Mode
+            </button>
+
+            <button id="resetButton" class="reset-button">
+                Challenge zurücksetzen
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Fischer-Challenge
+        </p>
+
+    </footer>
+
+    <script src="Fisch.js"></>
+
+</body>
+</html>
