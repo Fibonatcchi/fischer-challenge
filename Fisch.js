@@ -17,11 +17,21 @@ async function teilnehmerAusSupabaseLaden() {
         .select("*");
 
     if (error) {
-        console.error("Fehler beim Laden der Teilnehmer:", error);
+        alert("Supabase Fehler: " + error.message);
         return;
     }
 
-    console.log("Teilnehmer aus Supabase:", data);
+    if (data.length === 0) {
+        alert("Supabase ist verbunden, aber es wurden keine Teilnehmer gefunden.");
+        return;
+    }
+
+    alert(
+        "Teilnehmer aus Supabase:\n\n" +
+        data.map(function(teilnehmer) {
+            return teilnehmer.name;
+        }).join("\n")
+    );
 }
 
 teilnehmerAusSupabaseLaden();
