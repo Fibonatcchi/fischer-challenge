@@ -2,30 +2,6 @@
    FISCHARTEN
 ========================= */
 
-const SUPABASE_URL = "https://lcugqumvscjjukxqhphf.supabase.co";
-const SUPABASE_KEY = "sb_publishable_KWnK3KdWYn8fVNfR6iEWug_5XrM64Ol";
-
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-async function challengeLaden() {
-    const { data, error } = await supabaseClient
-        .from("challenges")
-        .select("*")
-        .limit(1);
-
-    if (error) {
-        console.error("Fehler beim Laden der Challenge:", error);
-        return;
-    }
-
-    console.log("Challenge aus Supabase:", data[0]);
-}
-
-challengeLaden();
-
 const fischarten = [
     "Hecht",
     "Zander",
