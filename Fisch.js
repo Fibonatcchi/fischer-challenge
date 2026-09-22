@@ -2,6 +2,30 @@
    FISCHARTEN
 ========================= */
 
+const SUPABASE_URL = "https://lcugqumvscjjukxqhphf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_KWnK3KdWYn8fVNfR6iEWug_5XrM64Ol";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function testSupabase() {
+    const { data, error } = await supabaseClient
+        .from("challenges")
+        .select("*");
+
+    if (error) {
+        console.error("Supabase Fehler:", error);
+        return;
+    }
+
+    console.log("Supabase Verbindung funktioniert!");
+    console.log(data);
+}
+
+testSupabase();
+
 const fischarten = [
     "Hecht",
     "Zander",
