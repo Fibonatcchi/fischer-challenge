@@ -158,7 +158,7 @@ async function teilnehmerAusSupabaseLaden() {
 
 teilnehmerHinzufuegen.addEventListener(
     "click",
-    function() {
+    async function() {
 
         const name =
             teilnehmerInput.value.trim();
@@ -167,22 +167,50 @@ teilnehmerHinzufuegen.addEventListener(
             return;
         }
 
+        // Prüfen, ob der Name bereits existiert
         if (daten.teilnehmer.includes(name)) {
+            alert("Dieser Teilnehmer existiert bereits.");
             return;
         }
 
-        daten.teilnehmer.push(name);
+        // Teilnehmer in Supabase speichern
+        const { data, error } = await supabaseClient
+            .from("teilnehmer")
+            .insert([
+                {
+                    name: name,
+                    challenge_id: aktuelleChallengeId
+                }
+            ])
+            .select()
+            .single();
 
-        daten.faenge[name] = [];
+        if (error) {
+            alert(
+                "Fehler beim Hinzufügen: " +
+                error.message
+            );
+            return;
+        }
 
-        aktuellerTeilnehmer = name;
+        // Teilnehmer lokal für die Anzeige übernehmen
+        daten.teilnehmer.push(data.name);
+
+        if (!daten.faenge[data.name]) {
+            daten.faenge[data.name] = [];
+        }
+
+        if (!daten.teilnehmerIds) {
+            daten.teilnehmerIds = {};
+        }
+
+        daten.teilnehmerIds[data.name] = data.id;
+
+        aktuellerTeilnehmer = data.name;
 
         teilnehmerInput.value = "";
 
-        speichern();
-
         anzeigen();
-
     }
 );
 
