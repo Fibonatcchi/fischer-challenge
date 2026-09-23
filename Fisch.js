@@ -10,32 +10,6 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
-async function teilnehmerAusSupabaseLaden() {
-
-    const { data, error } = await supabaseClient
-        .from("teilnehmer")
-        .select("*");
-
-    if (error) {
-        alert("Supabase Fehler: " + error.message);
-        return;
-    }
-
-    if (data.length === 0) {
-        alert("Supabase ist verbunden, aber es wurden keine Teilnehmer gefunden.");
-        return;
-    }
-
-    alert(
-        "Teilnehmer aus Supabase:\n\n" +
-        data.map(function(teilnehmer) {
-            return teilnehmer.name;
-        }).join("\n")
-    );
-}
-
-teilnehmerAusSupabaseLaden();
-
 const fischarten = [
     "Hecht",
     "Zander",
@@ -126,6 +100,35 @@ function speichern() {
         JSON.stringify(daten)
     );
 
+}
+
+async function teilnehmerAusSupabaseLaden() {
+
+    const { data, error } = await supabaseClient
+        .from("teilnehmer")
+        .select("id, name")
+        .order("name");
+
+    if (error) {
+        alert("Fehler beim Laden der Teilnehmer: " + error.message);
+        return;
+    }
+
+    daten.teilnehmer = data.map(function(teilnehmer) {
+        return teilnehmer.name;
+    });
+
+    daten.teilnehmerIds = {};
+
+    data.forEach(function(teilnehmer) {
+        daten.teilnehmerIds[teilnehmer.name] = teilnehmer.id;
+    });
+
+    if (daten.teilnehmer.length > 0) {
+        aktuellerTeilnehmer = daten.teilnehmer[0];
+    }
+
+    anzeigen();
 }
 
 
