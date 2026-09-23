@@ -178,7 +178,6 @@ async function fischartenAusSupabaseLaden() {
     const { data, error } = await supabaseClient
         .from("fischarten")
         .select("id, name")
-        .eq("challenge_id", aktuelleChallengeId)
         .order("name");
 
     if (error) {
