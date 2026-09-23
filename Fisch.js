@@ -711,11 +711,4 @@ resetButton.addEventListener(
    START
 ========================= */
 
-if (daten.teilnehmer.length > 0) {
-
-    aktuellerTeilnehmer =
-        daten.teilnehmer[0];
-
-}
-
-anzeigen();
+teilnehmerAusSupabaseLaden();
