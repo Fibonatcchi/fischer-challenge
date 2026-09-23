@@ -16,29 +16,28 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("*");
+        .select("id, name")
+        .limit(1);
 
     if (error) {
         alert(
-            "FEHLER:\n\n" +
+            "Fehler beim Laden der Challenge: " +
             error.message
         );
         return;
     }
 
-    alert(
-        "CHALLENGES GEFUNDEN:\n\n" +
-        JSON.stringify(data, null, 2)
-    );
-
     if (data.length === 0) {
-        alert("Die Tabelle ist leer.");
+        alert("Keine Challenge gefunden.");
         return;
     }
 
     aktuelleChallengeId = data[0].id;
 
-    console.log("Aktuelle Challenge:", data[0].name);
+    console.log(
+        "Aktuelle Challenge:",
+        data[0].name
+    );
 }
 
 const fischarten = [
