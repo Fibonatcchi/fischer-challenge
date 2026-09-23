@@ -12,6 +12,10 @@ const supabaseClient = supabase.createClient(
 
 let aktuelleChallengeId = null;
 
+/* =========================
+   CHALLENGES AUS SUPABASE LADEN
+========================= */
+
 async function challengeLaden() {
 
     const { data, error } = await supabaseClient
@@ -132,6 +136,10 @@ function speichern() {
 
 }
 
+/* =========================
+   TEILNEHMER AUS SUPABASE LADEN
+========================= */
+
 async function teilnehmerAusSupabaseLaden() {
 
     const { data, error } = await supabaseClient
@@ -161,6 +169,31 @@ async function teilnehmerAusSupabaseLaden() {
     anzeigen();
 }
 
+/* =========================
+   FISCHARTEN AUS SUPABASE LADEN
+========================= */
+
+async function fischartenAusSupabaseLaden() {
+
+    const { data, error } = await supabaseClient
+        .from("fischarten")
+        .select("id, name")
+        .eq("challenge_id", aktuelleChallengeId)
+        .order("name");
+
+    if (error) {
+        alert(
+            "Fehler beim Laden der Fischarten: " +
+            error.message
+        );
+        return;
+    }
+
+    alert(
+        "Fischarten gefunden:\n\n" +
+        JSON.stringify(data, null, 2)
+    );
+}
 
 /* =========================
    TEILNEHMER HINZUFÜGEN
@@ -770,11 +803,9 @@ resetButton.addEventListener(
 ========================= */
 
 async function startApp() {
-
     await challengeLaden();
-
     await teilnehmerAusSupabaseLaden();
-
+    await fischartenAusSupabaseLaden();
 }
 
 startApp();
