@@ -142,15 +142,27 @@ function speichern() {
 
 async function teilnehmerAusSupabaseLaden() {
 
+    alert("A - Teilnehmerfunktion gestartet");
+
     const { data, error } = await supabaseClient
         .from("teilnehmer")
         .select("id, name")
         .order("name");
 
+    alert("B - Supabase-Abfrage beendet");
+
     if (error) {
-        alert("Fehler beim Laden der Teilnehmer: " + error.message);
+        alert(
+            "TEILNEHMER-FEHLER:\n\n" +
+            error.message
+        );
         return;
     }
+
+    alert(
+        "C - Teilnehmer gefunden:\n\n" +
+        JSON.stringify(data, null, 2)
+    );
 
     daten.teilnehmer = data.map(function(teilnehmer) {
         return teilnehmer.name;
@@ -159,19 +171,18 @@ async function teilnehmerAusSupabaseLaden() {
     daten.teilnehmerIds = {};
 
     data.forEach(function(teilnehmer) {
-        daten.teilnehmerIds[teilnehmer.name] = teilnehmer.id;
+        daten.teilnehmerIds[teilnehmer.name] =
+            teilnehmer.id;
     });
 
     if (daten.teilnehmer.length > 0) {
-
-    aktuellerTeilnehmer = daten.teilnehmer[0];
-
-    if (!daten.faenge[aktuellerTeilnehmer]) {
-        daten.faenge[aktuellerTeilnehmer] = [];
+        aktuellerTeilnehmer =
+            daten.teilnehmer[0];
     }
-}
 
-anzeigen();
+    alert("D - Teilnehmerfunktion fertig");
+
+    // anzeigen() vorübergehend NICHT aufrufen
 }
 
 /* =========================
