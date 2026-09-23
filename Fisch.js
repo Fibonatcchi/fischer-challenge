@@ -802,9 +802,20 @@ resetButton.addEventListener(
 ========================= */
 
 async function startApp() {
+
+    alert("1 - Start");
+
     await challengeLaden();
+
+    alert("2 - Challenge geladen");
+
     await teilnehmerAusSupabaseLaden();
+
+    alert("3 - Teilnehmer geladen");
+
     await fischartenAusSupabaseLaden();
+
+    alert("4 - Fischarten geladen");
 }
 
 startApp();
