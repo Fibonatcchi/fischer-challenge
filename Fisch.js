@@ -16,16 +16,23 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("id, name")
-        .limit(1);
+        .select("*");
 
     if (error) {
-        alert("Fehler beim Laden der Challenge: " + error.message);
+        alert(
+            "FEHLER:\n\n" +
+            error.message
+        );
         return;
     }
 
+    alert(
+        "CHALLENGES GEFUNDEN:\n\n" +
+        JSON.stringify(data, null, 2)
+    );
+
     if (data.length === 0) {
-        alert("Keine Challenge gefunden.");
+        alert("Die Tabelle ist leer.");
         return;
     }
 
