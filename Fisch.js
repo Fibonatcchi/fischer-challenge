@@ -163,10 +163,15 @@ async function teilnehmerAusSupabaseLaden() {
     });
 
     if (daten.teilnehmer.length > 0) {
-        aktuellerTeilnehmer = daten.teilnehmer[0];
-    }
 
-    anzeigen();
+    aktuellerTeilnehmer = daten.teilnehmer[0];
+
+    if (!daten.faenge[aktuellerTeilnehmer]) {
+        daten.faenge[aktuellerTeilnehmer] = [];
+    }
+}
+
+anzeigen();
 }
 
 /* =========================
