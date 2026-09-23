@@ -10,6 +10,26 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
+let aktuelleChallengeId = null;
+
+async function challengeLaden() {
+
+    const { data, error } = await supabaseClient
+        .from("challenges")
+        .select("id, name")
+        .limit(1)
+        .single();
+
+    if (error) {
+        alert("Fehler beim Laden der Challenge: " + error.message);
+        return;
+    }
+
+    aktuelleChallengeId = data.id;
+
+    console.log("Aktuelle Challenge:", data.name);
+}
+
 const fischarten = [
     "Hecht",
     "Zander",
@@ -711,4 +731,12 @@ resetButton.addEventListener(
    START
 ========================= */
 
-teilnehmerAusSupabaseLaden();
+async function startApp() {
+
+    await challengeLaden();
+
+    await teilnehmerAusSupabaseLaden();
+
+}
+
+startApp();
