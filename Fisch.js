@@ -44,18 +44,7 @@ async function challengeLaden() {
     );
 }
 
-const fischarten = [
-    "Hecht",
-    "Zander",
-    "Barsch",
-    "Rotauge",
-    "Rotfeder",
-    "Laube",
-    "Barbe",
-    "Karpfen",
-    "Schleie",
-    "Forelle"
-];
+let fischarten = [];
 
 
 /* =========================
@@ -204,10 +193,9 @@ async function fischartenAusSupabaseLaden() {
         return;
     }
 
-    alert(
-        "Fischarten gefunden:\n\n" +
-        JSON.stringify(data, null, 2)
-    );
+    fischarten = data.map(function(fisch) {
+    return fisch.name;
+});
 }
 
 /* =========================
