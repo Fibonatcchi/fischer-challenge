@@ -131,14 +131,10 @@ function speichern() {
 
 async function teilnehmerAusSupabaseLaden() {
 
-    alert("A - Teilnehmerfunktion gestartet");
-
     const { data, error } = await supabaseClient
         .from("teilnehmer")
         .select("id, name")
         .order("name");
-
-    alert("B - Supabase-Abfrage beendet");
 
     if (error) {
         alert(
@@ -147,11 +143,6 @@ async function teilnehmerAusSupabaseLaden() {
         );
         return;
     }
-
-    alert(
-        "C - Teilnehmer gefunden:\n\n" +
-        JSON.stringify(data, null, 2)
-    );
 
     daten.teilnehmer = data.map(function(teilnehmer) {
         return teilnehmer.name;
@@ -168,8 +159,6 @@ async function teilnehmerAusSupabaseLaden() {
         aktuellerTeilnehmer =
             daten.teilnehmer[0];
     }
-
-    alert("D - Teilnehmerfunktion fertig");
 
     // anzeigen() vorübergehend NICHT aufrufen
 }
