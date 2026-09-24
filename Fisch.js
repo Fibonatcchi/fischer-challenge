@@ -155,15 +155,18 @@ async function teilnehmerAusSupabaseLaden() {
             teilnehmer.id;
     });
 
-    if (daten.teilnehmer.length > 0) {
+    daten.teilnehmer.forEach(function(name) {
 
+    if (!daten.faenge[name]) {
+        daten.faenge[name] = [];
+    }
+
+});
+
+if (daten.teilnehmer.length > 0) {
     aktuellerTeilnehmer =
         daten.teilnehmer[0];
-
-    if (!daten.faenge[aktuellerTeilnehmer]) {
-        daten.faenge[aktuellerTeilnehmer] = [];
-    }
-    }
+}
 }
 
 /* =========================
@@ -809,6 +812,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision D");
+alert("Revision E");
 
 startApp();
