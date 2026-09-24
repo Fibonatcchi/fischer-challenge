@@ -825,12 +825,13 @@ async function startApp() {
 
     alert("2 - Challenge geladen");
 
-    alert("3 - Jetzt wird Teilnehmerfunktion aufgerufen");
+    await teilnehmerAusSupabaseLaden();
 
-    teilnehmerAusSupabaseLaden();
+    alert("3 - Teilnehmer geladen");
 
-    alert("4 - Teilnehmerfunktion wurde aufgerufen");
+    await fischartenAusSupabaseLaden();
 
+    alert("4 - Fischarten geladen");
 }
 
 startApp();
