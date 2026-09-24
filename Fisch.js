@@ -159,8 +159,6 @@ async function teilnehmerAusSupabaseLaden() {
         aktuellerTeilnehmer =
             daten.teilnehmer[0];
     }
-
-    anzeigen();
 }
 
 /* =========================
@@ -806,6 +804,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision B");
+alert("Revision C");
 
 startApp();
