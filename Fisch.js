@@ -160,7 +160,7 @@ async function teilnehmerAusSupabaseLaden() {
             daten.teilnehmer[0];
     }
 
-    // anzeigen() vorübergehend NICHT aufrufen
+    anzeigen();
 }
 
 /* =========================
@@ -185,6 +185,9 @@ async function fischartenAusSupabaseLaden() {
     fischarten = data.map(function(fisch) {
     return fisch.name;
 });
+
+anzeigen();
+  
 }
 
 /* =========================
