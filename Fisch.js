@@ -171,8 +171,7 @@ async function fischartenAusSupabaseLaden() {
 
     const { data, error } = await supabaseClient
         .from("fischarten")
-        .select("id, name")
-        .order("name");
+        .select("id, name");
 
     if (error) {
         alert(
@@ -183,11 +182,10 @@ async function fischartenAusSupabaseLaden() {
     }
 
     fischarten = data.map(function(fisch) {
-    return fisch.name;
-});
+        return fisch.name;
+    });
 
-anzeigen();
-  
+    alert("Revision B – Fischarten geladen:\n\n" + fischarten.join("\n"));
 }
 
 /* =========================
@@ -807,5 +805,7 @@ async function startApp() {
 
     anzeigen();
 }
+
+alert("Revision B");
 
 startApp();
