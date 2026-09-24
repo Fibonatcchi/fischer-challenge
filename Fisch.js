@@ -156,8 +156,13 @@ async function teilnehmerAusSupabaseLaden() {
     });
 
     if (daten.teilnehmer.length > 0) {
-        aktuellerTeilnehmer =
-            daten.teilnehmer[0];
+
+    aktuellerTeilnehmer =
+        daten.teilnehmer[0];
+
+    if (!daten.faenge[aktuellerTeilnehmer]) {
+        daten.faenge[aktuellerTeilnehmer] = [];
+    }
     }
 }
 
@@ -804,6 +809,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision C");
+alert("Revision D");
 
 startApp();
