@@ -525,7 +525,7 @@ function fischeAnzeigen() {
 
                 speichernButton.addEventListener(
                     "click",
-                    function() {
+                    async function() {
 
                         const laenge =
                             input.value;
@@ -556,34 +556,56 @@ function fischeAnzeigen() {
                         };
 
 
-                        daten.faenge[
-                            aktuellerTeilnehmer
-                        ].push(neuerFang);
+    const { data, error } = await supabaseClient
+    .from("faenge")
+    .insert([
+        {
+            teilnehmer_id:
+                daten.teilnehmerIds[aktuellerTeilnehmer],
 
+            fischart_id:
+                neuerFang.fischartId,
 
-                        speichern();
+            laenge:
+                neuerFang.laenge
+        }
+    ])
+    .select()
+    .single();
 
-                        anzeigen();
+if (error) {
+
+    alert(
+        "Fehler beim Speichern des Fangs:\n\n" +
+        error.message
+    );
+
+    return;
+}
+
+daten.faenge[
+    aktuellerTeilnehmer
+].push(neuerFang);
+
+anzeigen();
 
                     }
                 );
 
 
-                eingabe.appendChild(input);
+  eingabe.appendChild(input);
 
-                eingabe.appendChild(
-                    speichernButton
-                );
+  eingabe.appendChild(speichernButton);
 
 
-                karte.appendChild(fangButton);
+  karte.appendChild(fangButton);
 
-                karte.appendChild(eingabe);
+  karte.appendChild(eingabe);
 
             }
 
 
-            fischListe.appendChild(karte);
+ fischListe.appendChild(karte);
 
         }
     );
@@ -809,6 +831,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision H");
+alert("Revision I");
 
 startApp();
