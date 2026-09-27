@@ -187,9 +187,7 @@ async function fischartenAusSupabaseLaden() {
         return;
     }
 
-    fischarten = data.map(function(fisch) {
-        return fisch.name;
-    });
+    fischarten = data;
 
     alert("Revision B – Fischarten geladen:\n\n" + fischarten.join("\n"));
 }
@@ -389,7 +387,7 @@ function fischeAnzeigen() {
             const titel =
                 document.createElement("h3");
 
-            titel.textContent = fisch;
+            titel.textContent = fisch.name;
 
 
             const status =
@@ -812,6 +810,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision E");
+alert("Revision F");
 
 startApp();
