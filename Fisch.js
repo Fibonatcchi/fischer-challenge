@@ -501,27 +501,35 @@ function fischeAnzeigen() {
                 );
 
 
-                loeschen.addEventListener(
-                    "click",
-                    function() {
+   loeschen.addEventListener(
+    "click",
+    async function() {
 
-                        daten.faenge[
-                            aktuellerTeilnehmer
-                        ] =
-                            faenge.filter(
-                                function(eintrag) {
+        const { error } = await supabaseClient
+            .from("faenge")
+            .delete()
+            .eq("id", fang.supabaseId);
 
-                                    return eintrag.fisch !== fisch;
+        if (error) {
+            alert(
+                "Fehler beim Löschen des Fangs:\n\n" +
+                error.message
+            );
+            return;
+        }
 
-                                }
-                            );
+        daten.faenge[
+            aktuellerTeilnehmer
+        ] =
+            faenge.filter(
+                function(eintrag) {
+                    return eintrag.supabaseId !== fang.supabaseId;
+                }
+            );
 
-                        speichern();
-
-                        anzeigen();
-
-                    }
-                );
+        anzeigen();
+    }
+);
 
 
                 karte.appendChild(loeschen);
@@ -889,6 +897,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision L");
+alert("Revision M");
 
 startApp();
