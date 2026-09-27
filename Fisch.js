@@ -173,7 +173,29 @@ if (daten.teilnehmer.length > 0) {
    FAENGE AUS SUPABASE LADEN
 ========================= */
 
+/* VORÜBERGEHENDER CODE */
+
 async function faengeAusSupabaseLaden() {
+
+    const { data, error } = await supabaseClient
+        .from("faenge")
+        .select("*");
+
+    if (error) {
+        alert(
+            "FEHLER BEIM LADEN:\n\n" +
+            error.message
+        );
+        return;
+    }
+
+    alert(
+        "FÄNGE AUS SUPABASE:\n\n" +
+        JSON.stringify(data, null, 2)
+    );
+}
+
+/* async function faengeAusSupabaseLaden() {
 
     const { data, error } = await supabaseClient
         .from("faenge")
@@ -225,7 +247,7 @@ console.log("FISCHARTEN:", fischarten);
     });
 
 });
-}
+} */
 
 /* =========================
    FISCHARTEN AUS SUPABASE LADEN
