@@ -193,6 +193,11 @@ async function faengeAusSupabaseLaden() {
         return;
     }
 
+console.log("SUPABASE FÄNGE:", data);
+console.log("TEILNEHMER:", daten.teilnehmer);
+console.log("TEILNEHMER IDS:", daten.teilnehmerIds);
+console.log("FISCHARTEN:", fischarten);
+  
     data.forEach(function(fang) {
 
     const teilnehmerName =
