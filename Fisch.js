@@ -193,7 +193,33 @@ async function faengeAusSupabaseLaden() {
         return;
     }
 
-    console.log("Fänge aus Supabase:", data);
+    data.forEach(function(fang) {
+
+    const teilnehmerName =
+        daten.teilnehmer.find(function(name) {
+            return daten.teilnehmerIds[name] === fang.teilnehmer_id;
+        });
+
+    const fischart =
+        fischarten.find(function(fisch) {
+            return fisch.id === fang.fischart_id;
+        });
+
+    if (!teilnehmerName || !fischart) {
+        return;
+    }
+
+    daten.faenge[teilnehmerName].push({
+        fisch: fischart.name,
+        fischartId: fischart.id,
+        laenge: Number(fang.laenge),
+        datum:
+            new Date(fang.zeitpunkt)
+            .toLocaleDateString("de-CH"),
+        supabaseId: fang.id
+    });
+
+});
 }
 
 /* =========================
@@ -858,6 +884,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision K");
+alert("Revision L");
 
 startApp();
