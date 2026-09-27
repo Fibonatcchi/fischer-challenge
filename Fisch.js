@@ -371,7 +371,7 @@ function fischeAnzeigen() {
                 faenge.find(
                     function(eintrag) {
 
-                        return eintrag.fisch === fisch;
+                        return eintrag.fisch === fisch.name;
 
                     }
                 );
@@ -810,6 +810,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision F");
+alert("Revision G");
 
 startApp();
