@@ -170,6 +170,33 @@ if (daten.teilnehmer.length > 0) {
 }
 
 /* =========================
+   FAENGE AUS SUPABASE LADEN
+========================= */
+
+async function faengeAusSupabaseLaden() {
+
+    const { data, error } = await supabaseClient
+        .from("faenge")
+        .select(`
+            id,
+            teilnehmer_id,
+            fischart_id,
+            laenge,
+            zeitpunkt
+        `);
+
+    if (error) {
+        alert(
+            "Fehler beim Laden der Fänge:\n\n" +
+            error.message
+        );
+        return;
+    }
+
+    console.log("Fänge aus Supabase:", data);
+}
+
+/* =========================
    FISCHARTEN AUS SUPABASE LADEN
 ========================= */
 
@@ -826,9 +853,11 @@ async function startApp() {
 
     await fischartenAusSupabaseLaden();
 
+    await faengeAusSupabaseLaden();
+
     anzeigen();
 }
 
-alert("Revision J");
+alert("Revision K");
 
 startApp();
