@@ -542,16 +542,15 @@ function fischeAnzeigen() {
                         }
 
 
-                        const neuerFang = {
+                  const neuerFang = {
 
-                            fisch: fisch,
+                  fisch: fisch.name,
+                  fischartId: fisch.id,
+                  laenge: Number(laenge),
 
-                            laenge: Number(laenge),
-
-                            datum:
-                                new Date()
-                                .toLocaleDateString(
-                                    "de-CH"
+                  datum: new Date()
+                  .toLocaleDateString(
+                 "de-CH"
                                 )
 
                         };
@@ -810,6 +809,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision G");
+alert("Revision H");
 
 startApp();
