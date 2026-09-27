@@ -570,8 +570,20 @@ function fischeAnzeigen() {
                 neuerFang.laenge
         }
     ])
-    .select()
-    .single();
+    const { data, error } = await supabaseClient
+    .from("faenge")
+    .insert([
+        {
+            teilnehmer_id:
+                daten.teilnehmerIds[aktuellerTeilnehmer],
+
+            fischart_id:
+                neuerFang.fischartId,
+
+            laenge:
+                neuerFang.laenge
+        }
+    ]);
 
 if (error) {
 
@@ -831,6 +843,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision I");
+alert("Revision J");
 
 startApp();
