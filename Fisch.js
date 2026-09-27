@@ -569,20 +569,6 @@ function fischeAnzeigen() {
             laenge:
                 neuerFang.laenge
         }
-    ])
-    const { data, error } = await supabaseClient
-    .from("faenge")
-    .insert([
-        {
-            teilnehmer_id:
-                daten.teilnehmerIds[aktuellerTeilnehmer],
-
-            fischart_id:
-                neuerFang.fischartId,
-
-            laenge:
-                neuerFang.laenge
-        }
     ]);
 
 if (error) {
