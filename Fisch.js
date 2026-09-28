@@ -802,6 +802,60 @@ function ranglisteAnzeigen() {
 
     rangliste.innerHTML = "";
 
+    const punkte =
+        punkteBerechnen();
+
+    const ergebnisse =
+        daten.teilnehmer.map(
+            function(name) {
+
+                return {
+                    name: name,
+                    punkte: punkte[name] || 0
+                };
+
+            }
+        );
+
+    ergebnisse.sort(
+        function(a, b) {
+            return b.punkte - a.punkte;
+        }
+    );
+
+    ergebnisse.forEach(
+        function(ergebnis, index) {
+
+            const eintrag =
+                document.createElement("div");
+
+            eintrag.classList.add(
+                "ranglisten-eintrag"
+            );
+
+            eintrag.innerHTML =
+                "<strong>" +
+                (index + 1) +
+                ". " +
+                ergebnis.name +
+                "</strong>" +
+                "<span>" +
+                ergebnis.punkte +
+                " Punkte" +
+                "</span>";
+
+            rangliste.appendChild(
+                eintrag
+            );
+
+        }
+    );
+}
+
+/* function ranglisteAnzeigen() {
+
+    rangliste.innerHTML = "";
+
 
     const ergebnisse =
         daten.teilnehmer.map(
@@ -876,7 +930,7 @@ function ranglisteAnzeigen() {
         }
     );
 
-}
+}*/
 
 
 /* =========================
@@ -967,19 +1021,9 @@ async function startApp() {
 
     await faengeAusSupabaseLaden();
 
-  const punkte =
-    punkteBerechnen();
-
-alert(
-    "BERECHNETE PUNKTE:\n\n" +
-    JSON.stringify(punkte, null, 2)
-);
-
-anzeigen();
-
     anzeigen();
 }
 
-alert("Revision N");
+alert("Revision O");
 
 startApp();
