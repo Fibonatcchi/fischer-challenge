@@ -315,9 +315,25 @@ body.dark .fang-datum {
     padding: 12px 16px;
     margin-bottom: 8px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+}
+
+.ranglisten-eintrag strong {
+    text-align: left;
+}
+
+.ranglisten-info {
+    display: contents;
+}
+
+.ranglisten-info span:first-child {
+    text-align: center;
+}
+
+.ranglisten-info span:last-child {
+    text-align: right;
 }
 
 /* Platz 1 – Gold */
