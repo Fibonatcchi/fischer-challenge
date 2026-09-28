@@ -842,16 +842,25 @@ function ranglisteAnzeigen() {
             eintrag.classList.add("platz-3");
         }
 
-        eintrag.innerHTML =
-            "<strong>" +
-            (index + 1) +
-            ". " +
-            ergebnis.name +
-            "</strong>" +
-            "<span>" +
-            ergebnis.punkte +
-            " Punkte" +
-            "</span>";
+        const anzahlFischarten =
+    daten.faenge[ergebnis.name].length;
+
+eintrag.innerHTML =
+    "<strong>" +
+    (index + 1) +
+    ". " +
+    ergebnis.name +
+    "</strong>" +
+    "<span class=\"ranglisten-info\">" +
+    "<span>" +
+    anzahlFischarten +
+    " Arten" +
+    "</span>" +
+    "<span>" +
+    ergebnis.punkte +
+    " Punkte" +
+    "</span>" +
+    "</span>";
 
         rangliste.appendChild(
             eintrag
@@ -953,6 +962,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision P");
+alert("Revision Q");
 
 startApp();

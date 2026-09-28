@@ -352,3 +352,13 @@ body.dark .fang-datum {
     );
     color: #ffffff;
 }
+
+.ranglisten-info {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.ranglisten-info span {
+    white-space: nowrap;
+}
