@@ -851,15 +851,13 @@ eintrag.innerHTML =
     ". " +
     ergebnis.name +
     "</strong>" +
-    "<span class=\"ranglisten-info\">" +
-    "<span>" +
+    "<span class=\"ranglisten-arten\">" +
     anzahlFischarten +
     " Arten" +
     "</span>" +
-    "<span>" +
+    "<span class=\"ranglisten-punkte\">" +
     ergebnis.punkte +
     " Punkte" +
-    "</span>" +
     "</span>";
 
         rangliste.appendChild(

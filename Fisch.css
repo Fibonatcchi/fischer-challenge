@@ -312,28 +312,31 @@ body.dark .fang-datum {
 ========================= */
 
 .ranglisten-eintrag {
+    position: relative;
     padding: 12px 16px;
     margin-bottom: 8px;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+    min-height: 24px;
 }
 
 .ranglisten-eintrag strong {
+    display: block;
     text-align: left;
 }
 
-.ranglisten-info {
-    display: contents;
+.ranglisten-arten {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
-.ranglisten-info span:first-child {
-    text-align: center;
-}
-
-.ranglisten-info span:last-child {
-    text-align: right;
+.ranglisten-punkte {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
 }
 
 /* Platz 1 – Gold */
