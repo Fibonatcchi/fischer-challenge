@@ -332,10 +332,7 @@ body.dark .fang-datum {
 }
 
 .ranglisten-punkte {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+    text-align: right;
     white-space: nowrap;
 }
 
