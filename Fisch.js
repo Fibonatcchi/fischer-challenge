@@ -824,114 +824,43 @@ function ranglisteAnzeigen() {
     );
 
     ergebnisse.forEach(
-        function(ergebnis, index) {
+    function(ergebnis, index) {
 
-            const eintrag =
-                document.createElement("div");
+        const eintrag =
+            document.createElement("div");
 
-            eintrag.classList.add(
-                "ranglisten-eintrag"
-            );
-
-            eintrag.innerHTML =
-                "<strong>" +
-                (index + 1) +
-                ". " +
-                ergebnis.name +
-                "</strong>" +
-                "<span>" +
-                ergebnis.punkte +
-                " Punkte" +
-                "</span>";
-
-            rangliste.appendChild(
-                eintrag
-            );
-
-        }
-    );
-}
-
-/* function ranglisteAnzeigen() {
-
-    rangliste.innerHTML = "";
-
-
-    const ergebnisse =
-        daten.teilnehmer.map(
-            function(name) {
-
-                return {
-
-                    name: name,
-
-                    anzahl:
-                        daten.faenge[name].length
-
-                };
-
-            }
+        eintrag.classList.add(
+            "ranglisten-eintrag"
         );
 
-
-    ergebnisse.sort(
-        function(a, b) {
-
-            return b.anzahl - a.anzahl;
-
+        // Platz-Klasse für die ersten drei Plätze
+        if (index === 0) {
+            eintrag.classList.add("platz-1");
+        } else if (index === 1) {
+            eintrag.classList.add("platz-2");
+        } else if (index === 2) {
+            eintrag.classList.add("platz-3");
         }
-    );
 
+        eintrag.innerHTML =
+            "<strong>" +
+            (index + 1) +
+            ". " +
+            ergebnis.name +
+            "</strong>" +
+            "<span>" +
+            ergebnis.punkte +
+            " Punkte" +
+            "</span>";
 
-    ergebnisse.forEach(
-        function(ergebnis, index) {
+        rangliste.appendChild(
+            eintrag
+        );
 
-            const eintrag =
-                document.createElement("div");
-
-            eintrag.classList.add(
-                "ranglisten-eintrag"
-            );
-
-
-            const rang =
-                document.createElement("span");
-
-            rang.classList.add("rang");
-
-            rang.textContent =
-                (index + 1) + ".";
-
-
-            const name =
-                document.createElement("span");
-
-            name.textContent =
-                ergebnis.name;
-
-
-            const punkte =
-                document.createElement("strong");
-
-            punkte.textContent =
-                ergebnis.anzahl +
-                " Arten";
-
-
-            eintrag.appendChild(rang);
-
-            eintrag.appendChild(name);
-
-            eintrag.appendChild(punkte);
-
-
-            rangliste.appendChild(eintrag);
-
-        }
-    );
-
-}*/
-
+    }
+);
+  
+}
 
 /* =========================
    ALLES AKTUALISIEREN
@@ -1024,6 +953,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision O");
+alert("Revision P");
 
 startApp();

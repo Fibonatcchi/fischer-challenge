@@ -306,3 +306,34 @@ body.dark .fang-datum {
     }
 
 }
+
+/* =========================
+   RANGLISTE – TOP 3
+========================= */
+
+.ranglisten-eintrag {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Platz 1 – Gold */
+.ranglisten-eintrag.platz-1 {
+    background-color: #d4af37;
+    color: #ffffff;
+}
+
+/* Platz 2 – Silber */
+.ranglisten-eintrag.platz-2 {
+    background-color: #c0c0c0;
+    color: #222222;
+}
+
+/* Platz 3 – Bronze */
+.ranglisten-eintrag.platz-3 {
+    background-color: #cd7f32;
+    color: #ffffff;
+}
