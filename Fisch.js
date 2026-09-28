@@ -967,10 +967,15 @@ async function startApp() {
 
     await faengeAusSupabaseLaden();
 
-  console.log(
-    "BERECHNETE PUNKTE:",
-    punkteBerechnen()
+  const punkte =
+    punkteBerechnen();
+
+alert(
+    "BERECHNETE PUNKTE:\n\n" +
+    JSON.stringify(punkte, null, 2)
 );
+
+anzeigen();
 
     anzeigen();
 }
