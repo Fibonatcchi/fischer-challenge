@@ -720,9 +720,82 @@ function fortschrittAnzeigen() {
 
 }
 
+/* =========================
+   PUNKTE BERECHNEN
+========================= */
+
+function punkteBerechnen() {
+
+    const punkte = {};
+
+    daten.teilnehmer.forEach(function(name) {
+        punkte[name] = 0;
+    });
+
+    fischarten.forEach(function(fisch) {
+
+        const faengeDieserArt = [];
+
+        daten.teilnehmer.forEach(function(name) {
+
+            const fang = daten.faenge[name].find(
+                function(eintrag) {
+                    return eintrag.fischartId === fisch.id;
+                }
+            );
+
+            if (fang) {
+                faengeDieserArt.push({
+                    teilnehmer: name,
+                    laenge: fang.laenge
+                });
+            }
+
+        });
+
+        if (faengeDieserArt.length === 0) {
+            return;
+        }
+
+        // 1 Punkt für das Fangen der Fischart
+        faengeDieserArt.forEach(function(fang) {
+            punkte[fang.teilnehmer] += 1;
+        });
+
+        // Zusatzpunkt für Zander, Seeforelle und Hecht
+        if (
+            fisch.name === "Zander" ||
+            fisch.name === "Seeforelle" ||
+            fisch.name === "Hecht"
+        ) {
+            faengeDieserArt.forEach(function(fang) {
+                punkte[fang.teilnehmer] += 1;
+            });
+        }
+
+        // +1 Punkt für den grössten Fisch dieser Art
+// aber nur, wenn mindestens zwei Teilnehmer
+// diese Fischart gefangen haben
+
+if (faengeDieserArt.length >= 2) {
+
+    faengeDieserArt.sort(
+        function(a, b) {
+            return b.laenge - a.laenge;
+        }
+    );
+
+    punkte[
+        faengeDieserArt[0].teilnehmer
+    ] += 1;
+}
+    });
+
+    return punkte;
+}
 
 /* =========================
-   RANGLISTE
+   RANGLISTE ANZEIGEN
 ========================= */
 
 function ranglisteAnzeigen() {
@@ -894,9 +967,14 @@ async function startApp() {
 
     await faengeAusSupabaseLaden();
 
+  console.log(
+    "BERECHNETE PUNKTE:",
+    punkteBerechnen()
+);
+
     anzeigen();
 }
 
-alert("Revision M");
+alert("Revision N");
 
 startApp();
