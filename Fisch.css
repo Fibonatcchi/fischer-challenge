@@ -322,18 +322,33 @@ body.dark .fang-datum {
 
 /* Platz 1 – Gold */
 .ranglisten-eintrag.platz-1 {
-    background-color: #d4af37;
+    background: linear-gradient(
+        135deg,
+        #b8860b,
+        #ffd700,
+        #b8860b
+    );
     color: #ffffff;
 }
 
 /* Platz 2 – Silber */
 .ranglisten-eintrag.platz-2 {
-    background-color: #c0c0c0;
+    background: linear-gradient(
+        135deg,
+        #8f8f8f,
+        #e5e5e5,
+        #9a9a9a
+    );
     color: #222222;
 }
 
 /* Platz 3 – Bronze */
 .ranglisten-eintrag.platz-3 {
-    background-color: #cd7f32;
+    background: linear-gradient(
+        135deg,
+        #8c4a20,
+        #cd7f32,
+        #8c4a20
+    );
     color: #ffffff;
 }
