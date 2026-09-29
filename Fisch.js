@@ -11,6 +11,8 @@ const supabaseClient = supabase.createClient(
 );
 
 let aktuelleChallengeId = null;
+let challengeStartdatum = null;
+let challengeEnddatum = null;
 
 /* =========================
    CHALLENGES AUS SUPABASE LADEN
@@ -20,7 +22,7 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("id, name")
+        .select("id, name, startdatum, enddatum")
         .limit(1);
 
     if (error) {
@@ -37,15 +39,66 @@ async function challengeLaden() {
     }
 
     aktuelleChallengeId = data[0].id;
+    challengeStartdatum = data[0].startdatum;
+    challengeEnddatum = data[0].enddatum;
+
+console.log(
+    "Challenge:",
+    data[0].name
+);
+
+console.log(
+    "Start:",
+    data[0].startdatum
+);
+
+console.log(
+    "Ende:",
+    data[0].enddatum
+);
 
     console.log(
         "Aktuelle Challenge:",
         data[0].name
     );
+
+  console.log(
+    "Challenge-Status:",
+    challengeStatus()
+);
 }
 
 let fischarten = [];
 
+/* =========================
+   CHALLENGE STATUS
+========================= */
+
+function challengeStatus() {
+
+    const heute =
+        new Date();
+
+    const start =
+        new Date(
+            challengeStartdatum + "T00:00:00"
+        );
+
+    const ende =
+        new Date(
+            challengeEnddatum + "T23:59:59"
+        );
+
+    if (heute < start) {
+        return "noch nicht gestartet";
+    }
+
+    if (heute > ende) {
+        return "beendet";
+    }
+
+    return "läuft";
+}
 
 /* =========================
    DATEN LADEN
@@ -964,6 +1017,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision R");
+alert("Revision S");
 
 startApp();
