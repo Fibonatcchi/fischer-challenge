@@ -635,7 +635,9 @@ function fischeAnzeigen() {
             laenge:
                 neuerFang.laenge
         }
-    ]);
+    ])
+    .select()
+    .single();
 
 if (error) {
 
@@ -646,6 +648,8 @@ if (error) {
 
     return;
 }
+
+neuerFang.supabaseId = data.id;
 
 daten.faenge[
     aktuellerTeilnehmer
@@ -960,6 +964,6 @@ async function startApp() {
     anzeigen();
 }
 
-alert("Revision Q");
+alert("Revision R");
 
 startApp();
