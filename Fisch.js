@@ -22,7 +22,7 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("id, name, startdatum, startzeit, enddatum, endzeit")
+        .select("id, name, startdatum, startzeit, enddatum")
         .limit(1);
 
     if (error) {
