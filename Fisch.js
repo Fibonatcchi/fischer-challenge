@@ -22,7 +22,7 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("id, name, startdatum, enddatum")
+        .select("id, name, startdatum, startzeit, enddatum, endzeit")
         .limit(1);
 
     if (error) {
@@ -39,6 +39,7 @@ async function challengeLaden() {
     }
 
     aktuelleChallengeId = data[0].id;
+    challengeTitel.textContent = data[0].name;
     challengeStartdatum = data[0].startdatum;
     challengeEnddatum = data[0].enddatum;
 
@@ -101,6 +102,94 @@ function challengeStatus() {
 }
 
 /* =========================
+   CHALLENGE INFO ANZEIGEN
+========================= */
+
+function challengeInfoAnzeigen() {
+
+    if (!challengeInfo) {
+        return;
+    }
+
+    const start =
+        new Date(
+            challengeStartdatum + "T00:00:00"
+        );
+
+    const ende =
+        new Date(
+            challengeEnddatum + "T00:00:00"
+        );
+
+    const datumFormat =
+        new Intl.DateTimeFormat(
+            "de-CH",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        );
+
+    const zeitraum =
+        datumFormat.format(start) +
+        " – " +
+        datumFormat.format(ende);
+
+    const status =
+        challengeStatus();
+
+    let statusText = "";
+
+    if (status === "noch nicht gestartet") {
+
+    const jetzt = new Date();
+
+    const differenz =
+        start - jetzt;
+
+    const tage =
+        Math.floor(
+            differenz / (1000 * 60 * 60 * 24)
+        );
+
+    const stunden =
+        Math.floor(
+            (differenz / (1000 * 60 * 60)) % 24
+        );
+
+    const minuten =
+        Math.floor(
+            (differenz / (1000 * 60)) % 60
+        );
+
+    statusText =
+        "🟡 Challenge startet in: " +
+        tage + " Tagen, " +
+        stunden + " Stunden und " +
+        minuten + " Minuten";
+
+} else if (status === "läuft") {
+
+        statusText =
+            "🟢 Challenge läuft";
+
+    } else {
+
+        statusText =
+            "🔴 Challenge ist beendet";
+    }
+
+    challengeInfo.innerHTML =
+        "<div>" +
+        zeitraum +
+        "</div>" +
+        "<div>" +
+        statusText +
+        "</div>";
+}
+
+/* =========================
    DATEN LADEN
 ========================= */
 
@@ -156,6 +245,12 @@ const darkModeButton =
 
 const resetButton =
     document.getElementById("resetButton");
+
+const challengeInfo =
+    document.getElementById("challengeInfo");
+
+const challengeTitel =
+    document.getElementById("challengeTitel");
 
 
 /* =========================
@@ -1008,6 +1103,8 @@ async function startApp() {
 
     await challengeLaden();
 
+    challengeInfoAnzeigen();
+
     await teilnehmerAusSupabaseLaden();
 
     await fischartenAusSupabaseLaden();
@@ -1015,6 +1112,11 @@ async function startApp() {
     await faengeAusSupabaseLaden();
 
     anzeigen();
+
+  setInterval(function() {
+    challengeInfoAnzeigen();
+}, 60000);
+  
 }
 
 alert("Revision S");
