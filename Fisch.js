@@ -12,7 +12,9 @@ const supabaseClient = supabase.createClient(
 
 let aktuelleChallengeId = null;
 let challengeStartdatum = null;
+let challengeStartzeit = null;
 let challengeEnddatum = null;
+let challengeEndzeit = null;
 
 /* =========================
    CHALLENGES AUS SUPABASE LADEN
@@ -22,7 +24,7 @@ async function challengeLaden() {
 
     const { data, error } = await supabaseClient
         .from("challenges")
-        .select("id, name, startdatum, startzeit, enddatum")
+        .select("id, name, startdatum, startzeit, enddatum, endzeit")
         .limit(1);
 
     if (error) {
@@ -41,7 +43,9 @@ async function challengeLaden() {
     aktuelleChallengeId = data[0].id;
     challengeTitel.textContent = data[0].name;
     challengeStartdatum = data[0].startdatum;
+    challengeStartzeit = data[0].startzeit;
     challengeEnddatum = data[0].enddatum;
+    challengeEndzeit = data[0].endzeit;
 
 console.log(
     "Challenge:",
@@ -81,14 +85,18 @@ function challengeStatus() {
         new Date();
 
     const start =
-        new Date(
-            challengeStartdatum + "T00:00:00"
-        );
+    new Date(
+        challengeStartdatum +
+        "T" +
+        challengeStartzeit
+    );
 
     const ende =
-        new Date(
-            challengeEnddatum + "T23:59:59"
-        );
+    new Date(
+        challengeEnddatum +
+        "T" +
+        challengeEndzeit
+    );
 
     if (heute < start) {
         return "noch nicht gestartet";
@@ -102,6 +110,31 @@ function challengeStatus() {
 }
 
 /* =========================
+   FANGERLAUBNIS
+========================= */
+
+function fangErlaubt() {
+
+    const jetzt = new Date();
+
+    const start =
+        new Date(
+            challengeStartdatum +
+            "T" +
+            challengeStartzeit
+        );
+
+    const ende =
+        new Date(
+            challengeEnddatum +
+            "T" +
+            challengeEndzeit
+        );
+
+    return jetzt >= start && jetzt <= ende;
+}
+
+/* =========================
    CHALLENGE INFO ANZEIGEN
 ========================= */
 
@@ -112,13 +145,17 @@ function challengeInfoAnzeigen() {
     }
 
     const start =
-        new Date(
-            challengeStartdatum + "T00:00:00"
-        );
+    new Date(
+        challengeStartdatum +
+        "T" +
+        challengeStartzeit
+    );
 
     const ende =
         new Date(
-            challengeEnddatum + "T00:00:00"
+            challengeEnddatum + 
+          "T" +
+          challengeEndzeit
         );
 
     const datumFormat =
@@ -132,9 +169,25 @@ function challengeInfoAnzeigen() {
         );
 
     const zeitraum =
-        datumFormat.format(start) +
-        " – " +
-        datumFormat.format(ende);
+    datumFormat.format(start) +
+    " " +
+    start.toLocaleTimeString(
+        "de-CH",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    ) +
+    " – " +
+    datumFormat.format(ende) +
+    " " +
+    ende.toLocaleTimeString(
+        "de-CH",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
 
     const status =
         challengeStatus();
@@ -171,10 +224,34 @@ function challengeInfoAnzeigen() {
 
 } else if (status === "läuft") {
 
-        statusText =
-            "🟢 Challenge läuft";
+    const jetzt = new Date();
 
-    } else {
+    const ende =
+    new Date(
+        challengeEnddatum +
+        "T" +
+        challengeEndzeit
+        );
+
+    const differenz =
+        ende - jetzt;
+
+    const stunden =
+        Math.floor(
+            differenz / (1000 * 60 * 60)
+        );
+
+    const minuten =
+        Math.floor(
+            (differenz / (1000 * 60)) % 60
+        );
+
+    statusText =
+        "🟢 Challenge endet in: " +
+        stunden + " Stunden und " +
+        minuten + " Minuten";
+
+} else {
 
         statusText =
             "🔴 Challenge ist beendet";
@@ -187,6 +264,88 @@ function challengeInfoAnzeigen() {
         "<div>" +
         statusText +
         "</div>";
+}
+
+/* =========================
+   START STATUS ANZEIGEN
+========================= */
+
+function startStatusAnzeigen() {
+
+    const startStatus =
+        document.getElementById("startStatus");
+
+    const startZeitraum =
+        document.getElementById("startZeitraum");
+
+    if (!startStatus || !startZeitraum) {
+        return;
+    }
+
+    const start =
+        new Date(
+            challengeStartdatum +
+            "T" +
+            challengeStartzeit
+        );
+
+    const ende =
+        new Date(
+            challengeEnddatum +
+            "T" +
+            challengeEndzeit
+        );
+
+    const datumFormat =
+        new Intl.DateTimeFormat(
+            "de-CH",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        );
+
+    const zeitraum =
+        datumFormat.format(start) +
+        " " +
+        start.toLocaleTimeString(
+            "de-CH",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        ) +
+        " – " +
+        datumFormat.format(ende) +
+        " " +
+        ende.toLocaleTimeString(
+            "de-CH",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    startZeitraum.textContent = zeitraum;
+
+    const status =
+        challengeStatus();
+
+    if (status === "noch nicht gestartet") {
+        startStatus.textContent =
+            "🟡 Challenge startet bald";
+    }
+
+    if (status === "läuft") {
+        startStatus.textContent =
+            "🟢 Challenge läuft";
+    }
+
+    if (status === "beendet") {
+        startStatus.textContent =
+            "🔴 Challenge beendet";
+    }
 }
 
 /* =========================
@@ -236,6 +395,12 @@ const fortschrittText =
 
 const fortschrittBalken =
     document.getElementById("fortschrittBalken");
+
+const anzahlTeilnehmer =
+    document.getElementById("anzahlTeilnehmer");
+
+const anzahlGefangeneArten =
+    document.getElementById("anzahlGefangeneArten");
 
 const rangliste =
     document.getElementById("rangliste");
@@ -744,14 +909,25 @@ function fischeAnzeigen() {
                         const laenge =
                             input.value;
 
+    if (!fangErlaubt()) {
 
-                        if (laenge === "") {
+    alert(
+        "Ein Fang kann nur während der laufenden Challenge eingetragen werden."
+    );
 
-                            alert(
-                                "Bitte eine Fanglänge eingeben."
-                            );
+    eingabe.style.display = "none";
+    fangButton.style.display = "block";
+    input.value = "";
 
-                            return;
+    return;
+           }
+
+
+            if (laenge === "") {
+
+             alert("Bitte eine Fanglänge eingeben.");
+
+            return;
 
                         }
 
@@ -869,6 +1045,24 @@ function fortschrittAnzeigen() {
 
     fortschrittBalken.style.width =
         prozent + "%";
+
+      anzahlTeilnehmer.textContent =
+        daten.teilnehmer.length;
+
+    let verschiedeneArten = new Set();
+
+    daten.teilnehmer.forEach(function(name) {
+
+        daten.faenge[name].forEach(function(fang) {
+
+            verschiedeneArten.add(fang.fischartId);
+
+        });
+
+    });
+
+    anzahlGefangeneArten.textContent =
+        verschiedeneArten.size;
 
 }
 
@@ -1022,6 +1216,146 @@ eintrag.innerHTML =
 }
 
 /* =========================
+   GRÖSSTER FANG ANZEIGEN
+========================= */
+
+function groesstenFangAnzeigen() {
+
+    const groessterFangElement =
+        document.getElementById("groessterFang");
+
+    if (!groessterFangElement) {
+        return;
+    }
+
+    let groessterFang = null;
+    let groessterTeilnehmer = null;
+
+    daten.teilnehmer.forEach(function(name) {
+
+        if (!daten.faenge[name]) {
+            return;
+        }
+
+        daten.faenge[name].forEach(function(fang) {
+
+            if (
+                !groessterFang ||
+                fang.laenge > groessterFang.laenge
+            ) {
+
+                groessterFang = fang;
+                groessterTeilnehmer = name;
+
+            }
+
+        });
+
+    });
+
+    if (!groessterFang) {
+
+        groessterFangElement.textContent =
+            "Noch kein Fang eingetragen.";
+
+        return;
+    }
+
+    groessterFangElement.innerHTML =
+        "<strong>" +
+        groessterFang.fisch +
+        "</strong>" +
+
+        "<span>" +
+        groessterFang.laenge +
+        " cm · " +
+        groessterTeilnehmer +
+        "</span>";
+}
+
+/* =========================
+   START RANGLISTE ANZEIGEN
+========================= */
+
+function startRanglisteAnzeigen() {
+
+    const startRangliste =
+        document.getElementById("startRangliste");
+
+    if (!startRangliste) {
+        return;
+    }
+
+    startRangliste.innerHTML = "";
+
+    const punkte =
+        punkteBerechnen();
+
+    const ergebnisse =
+        daten.teilnehmer.map(function(name) {
+
+            return {
+                name: name,
+                punkte: punkte[name] || 0,
+                arten:
+                    daten.faenge[name]
+                        ? daten.faenge[name].length
+                        : 0
+            };
+
+        });
+
+    ergebnisse.sort(function(a, b) {
+
+        return b.punkte - a.punkte;
+
+    });
+
+    ergebnisse
+        .slice(0, 3)
+        .forEach(function(ergebnis, index) {
+
+            const eintrag =
+                document.createElement("div");
+
+            eintrag.classList.add(
+                "start-ranglisten-eintrag"
+            );
+
+            if (index === 0) {
+                eintrag.classList.add("platz-1");
+            }
+
+            if (index === 1) {
+                eintrag.classList.add("platz-2");
+            }
+
+            if (index === 2) {
+                eintrag.classList.add("platz-3");
+            }
+
+            eintrag.innerHTML =
+                "<strong>" +
+                (index + 1) +
+                ". " +
+                ergebnis.name +
+                "</strong>" +
+
+                "<span>" +
+                ergebnis.arten +
+                " Arten · " +
+                ergebnis.punkte +
+                " Punkte" +
+                "</span>";
+
+            startRangliste.appendChild(
+                eintrag
+            );
+
+        });
+}
+
+/* =========================
    ALLES AKTUALISIEREN
 ========================= */
 
@@ -1034,6 +1368,10 @@ function anzeigen() {
     fortschrittAnzeigen();
 
     ranglisteAnzeigen();
+
+    startRanglisteAnzeigen();
+
+    groesstenFangAnzeigen();
 
 }
 
@@ -1105,6 +1443,8 @@ async function startApp() {
 
     challengeInfoAnzeigen();
 
+    startStatusAnzeigen();
+
     await teilnehmerAusSupabaseLaden();
 
     await fischartenAusSupabaseLaden();
@@ -1122,3 +1462,73 @@ async function startApp() {
 alert("Revision S");
 
 startApp();
+
+/* =========================
+   SEITENNAVIGATION
+========================= */
+
+const navigationsButtons =
+    document.querySelectorAll(".hauptnavigation button");
+
+const seiten =
+    document.querySelectorAll(".bereich");
+
+function seiteAnzeigen(seitenName) {
+
+    seiten.forEach(function(seite) {
+        seite.classList.add("seite-versteckt");
+    });
+
+    let zielSeite = null;
+
+    if (seitenName === "start") {
+        zielSeite = document.getElementById("seiteStart");
+    }
+
+    if (seitenName === "fische") {
+        zielSeite = document.getElementById("seiteFische");
+    }
+
+    if (seitenName === "teilnehmer") {
+        zielSeite = document.getElementById("seiteTeilnehmer");
+    }
+
+    if (seitenName === "einstellungen") {
+        zielSeite = document.getElementById("seiteEinstellungen");
+    }
+
+  if (seitenName === "regeln") {
+    zielSeite = document.getElementById("seiteRegeln");
+  }
+
+    if (zielSeite) {
+        zielSeite.classList.remove("seite-versteckt");
+    }
+
+    navigationsButtons.forEach(function(button) {
+        button.classList.remove("aktiv");
+    });
+
+    const aktiverButton =
+        document.querySelector(
+            '[data-seite="' + seitenName + '"]'
+        );
+
+    if (aktiverButton) {
+        aktiverButton.classList.add("aktiv");
+    }
+}
+
+
+navigationsButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        seiteAnzeigen(button.dataset.seite);
+
+    });
+
+});
+
+
+seiteAnzeigen("start");

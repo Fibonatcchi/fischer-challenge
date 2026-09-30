@@ -12,21 +12,33 @@
 <body>
 
     <header>
-        <h1>
-          <div id="challengeTitel">Fischer-Challenge></div>
-        </h1>
+          <div id="challengeTitel">Fischer-Challenge</div>
         
         <p>Wer fängt die meisten verschiedenen Fischarten?</p>
-        <br>
+        
         <div id="challengeInfo"></div>
     </header>
+  
+  <nav class="hauptnavigation">
 
+    <button data-seite="start">🏠 Start</button>
+
+    <button data-seite="fische">🐟 Fische</button>
+
+    <button data-seite="regeln">📜 Regeln</button>
+
+    <button data-seite="teilnehmer">👥 Teilnehmer</button>
+
+    <button data-seite="einstellungen">⚙️ Mehr</button>
+
+  </nav>
 
     <main>
 
         <!-- Teilnehmer -->
 
-        <section class="bereich">
+        <section class="bereich"
+          id="seiteTeilnehmer">
 
             <h2>Teilnehmer</h2>
 
@@ -51,7 +63,8 @@
 
         <!-- Aktueller Teilnehmer -->
 
-        <section class="bereich">
+        <section class="bereich"
+          id="seiteAktiverTeilnehmer">
 
             <h2>Aktiver Teilnehmer</h2>
 
@@ -62,9 +75,23 @@
 
         <!-- Fortschritt -->
 
-        <section class="bereich fortschritt-bereich">
+        <section class="bereich fortschritt-bereich"
+        id="seiteStart">
 
-            <h2>Fortschritt</h2>
+    <div class="start-status">
+
+        <div class="start-status-titel"
+             id="startStatus">
+            Challenge wird geladen...
+        </div>
+
+        <div class="start-status-zeitraum"
+             id="startZeitraum">
+        </div>
+
+    </div>
+
+    <h2>Fortschritt</h2>
 
             <div class="fortschritt-text">
 
@@ -80,12 +107,61 @@
 
             </div>
 
+          <div class="start-statistiken">
+
+    <div class="start-statistik">
+
+        <span class="start-statistik-wert"
+              id="anzahlTeilnehmer">
+            0
+        </span>
+
+        <span class="start-statistik-label">
+            Teilnehmer
+        </span>
+
+    </div>
+
+
+    <div class="start-statistik">
+
+        <span class="start-statistik-wert"
+              id="anzahlGefangeneArten">
+            0
+        </span>
+
+        <span class="start-statistik-label">
+            verschiedene Arten
+        </span>
+
+    </div>
+
+          </div>
+
+<div class="start-rangliste">
+
+    <h2>🏆 Top 3</h2>
+
+    <div id="startRangliste"></div>
+
+</div>
+
+   <div class="start-groesster-fang">
+
+    <h2>🎣 Grösster Fang</h2>
+
+    <div id="groessterFang">
+        Noch kein Fang eingetragen.
+    </div>
+
+          </div>
+          
         </section>
 
 
         <!-- Fischarten -->
 
-        <section class="bereich">
+        <section class="bereich seite-versteckt" id="seiteFische">
 
             <h2>Fischarten</h2>
 
@@ -93,10 +169,42 @@
 
         </section>
 
+      <!-- Regeln -->
+
+<section class="bereich seite-versteckt" id="seiteRegeln">
+
+    <h2>📜 Regeln</h2>
+
+    <p>
+        Die Challenge beginnt zum festgelegten Startzeitpunkt
+        und endet zum festgelegten Endzeitpunkt.
+    </p>
+
+    <p>
+        Es darf nur vom Ufer aus gefischt werden.
+    </p>
+
+    <p>
+        Für jede verschiedene Fischart gibt es 1 Punkt.
+    </p>
+
+    <p>
+        Bei Zander, Hecht und Seeforelle gibt es einen zusätzlichen
+        Bonuspunkt.
+    </p>
+
+    <p>
+        Wenn mehrere Teilnehmer dieselbe Fischart fangen,
+        erhält der grösste Fang einen zusätzlichen Punkt.
+    </p>
+
+</section>
+
 
         <!-- Rangliste -->
 
-        <section class="bereich">
+        <section class="bereich"
+          id="seiteRangliste">
 
             <h2>🏆 Rangliste</h2>
 
@@ -107,7 +215,8 @@
 
         <!-- Einstellungen -->
 
-        <section class="bereich">
+        <section class="bereich"
+          id="seiteEinstellungen">
 
             <h2>⚙️ Einstellungen</h2>
 
@@ -133,9 +242,7 @@
     </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="Fisch.js"></script>
-
-    <script src="Fisch.js"></script>
+  <script src="Fisch.js"></script>
 
 </body>
 </html>

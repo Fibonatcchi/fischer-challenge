@@ -9,8 +9,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #e8f4f8;
-    color: #222;
+    background-color: #151515;
+    color: #f2f2f2;
 }
 
 
@@ -19,18 +19,51 @@ body {
 ========================= */
 
 header {
-    background-color: #126782;
-    color: white;
+    background-color: #1b1b1b;
+    color: #f2f2f2;
     text-align: center;
-    padding: 25px 15px;
+    padding: 32px 18px 28px;
+    border-bottom: 1px solid #383838;
 }
 
-header h1 {
-    margin: 0 0 10px 0;
+#challengeTitel {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 header p {
-    margin: 0;
+    margin: 10px 0 0 0;
+    color: #8f8f8f;
+    font-size: 14px;
+}
+
+
+/* =========================
+   CHALLENGE INFO
+========================= */
+
+#challengeInfo {
+    margin-top: 20px;
+    color: #a7a7a7;
+}
+
+.challenge-zeitraum {
+    color: #cfcfcf;
+    font-size: 14px;
+}
+
+.challenge-status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 7px 12px;
+    background-color: #292d25;
+    border: 1px solid #697548;
+    border-radius: 5px;
+    color: #87965a;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 
@@ -41,19 +74,20 @@ header p {
 main {
     max-width: 900px;
     margin: auto;
-    padding: 15px;
+    padding: 18px;
 }
 
 .bereich {
-    background-color: white;
+    background-color: #222222;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #3a3a3a;
 }
 
 .bereich h2 {
     margin-top: 0;
+    color: #f2f2f2;
 }
 
 
@@ -64,21 +98,27 @@ main {
 .teilnehmer-liste {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 15px;
 }
 
 .teilnehmer-button {
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    background-color: #dceff5;
+    border: 1px solid #444444;
+    padding: 9px 14px;
+    border-radius: 6px;
+    background-color: #2b2b2b;
+    color: #d5d5d5;
     cursor: pointer;
 }
 
+.teilnehmer-button:hover {
+    border-color: #697548;
+}
+
 .teilnehmer-button.aktiv {
-    background-color: #126782;
-    color: white;
+    background-color: #697548;
+    border-color: #87965a;
+    color: #ffffff;
 }
 
 .neuer-teilnehmer {
@@ -99,23 +139,31 @@ input,
 select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #bbb;
-    border-radius: 8px;
+    border: 1px solid #484848;
+    border-radius: 6px;
+    background-color: #1c1c1c;
+    color: #f2f2f2;
     font-size: 16px;
 }
 
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #697548;
+}
+
 button {
-    border: none;
+    border: 1px solid #697548;
     padding: 11px 15px;
-    border-radius: 8px;
-    background-color: #126782;
-    color: white;
+    border-radius: 6px;
+    background-color: #697548;
+    color: #ffffff;
     cursor: pointer;
     font-size: 15px;
 }
 
 button:hover {
-    opacity: 0.9;
+    background-color: #7a8755;
 }
 
 
@@ -126,19 +174,20 @@ button:hover {
 .fortschritt-text {
     margin-bottom: 10px;
     font-weight: bold;
+    color: #f2f2f2;
 }
 
 .fortschritt-balken {
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 20px;
+    height: 10px;
+    background-color: #383838;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 #fortschrittBalken {
     height: 100%;
     width: 0%;
-    background-color: #49a85a;
+    background-color: #697548;
     transition: width 0.3s;
 }
 
@@ -150,28 +199,34 @@ button:hover {
 .fisch-liste {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 12px;
 }
 
 .fisch {
-    background-color: #f5f5f5;
+    background-color: #2b2b2b;
     padding: 18px;
-    border-radius: 15px;
-    border: 2px solid transparent;
+    border-radius: 7px;
+    border: 1px solid #414141;
+}
+
+.fisch:hover {
+    border-color: #555555;
 }
 
 .fisch.gefangen {
-    background-color: #d9f5dc;
-    border-color: #49a85a;
+    background-color: #292f26;
+    border-color: #697548;
 }
 
 .fisch h3 {
     margin-top: 0;
     margin-bottom: 8px;
+    color: #f2f2f2;
 }
 
 .status {
     margin-bottom: 15px;
+    color: #a7a7a7;
 }
 
 .eingabe {
@@ -191,16 +246,22 @@ button:hover {
 .fang-info {
     font-weight: bold;
     margin-bottom: 10px;
+    color: #f2f2f2;
 }
 
 .fang-datum {
     font-size: 13px;
-    color: #666;
+    color: #8f8f8f;
 }
 
 .loeschen-button {
-    background-color: #b83232;
+    background-color: #713f3f;
+    border-color: #8b4d4d;
     margin-top: 10px;
+}
+
+.loeschen-button:hover {
+    background-color: #824848;
 }
 
 
@@ -209,114 +270,16 @@ button:hover {
 ========================= */
 
 .ranglisten-eintrag {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
+    padding: 13px 16px;
     margin-bottom: 8px;
-    background-color: #f3f3f3;
-    border-radius: 8px;
-}
-
-.rang {
-    font-weight: bold;
-}
-
-
-/* =========================
-   EINSTELLUNGEN
-========================= */
-
-.reset-button {
-    background-color: #b83232;
-    margin-left: 10px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-}
-
-
-/* =========================
-   DARK MODE
-========================= */
-
-body.dark {
-    background-color: #172126;
-    color: #eee;
-}
-
-body.dark .bereich {
-    background-color: #243238;
-}
-
-body.dark .fisch {
-    background-color: #304047;
-}
-
-body.dark .fisch.gefangen {
-    background-color: #284d32;
-}
-
-body.dark .ranglisten-eintrag {
-    background-color: #304047;
-}
-
-body.dark input,
-body.dark select {
-    background-color: #304047;
-    color: white;
-    border-color: #667;
-}
-
-body.dark .teilnehmer-button {
-    background-color: #304047;
-    color: white;
-}
-
-body.dark .fang-datum {
-    color: #bbb;
-}
-
-
-/* =========================
-   HANDY
-========================= */
-
-@media (max-width: 600px) {
-
-    .fisch-liste {
-        grid-template-columns: 1fr;
-    }
-
-    .neuer-teilnehmer {
-        flex-direction: column;
-    }
-
-    .reset-button {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-}
-
-/* =========================
-   RANGLISTE – TOP 3
-========================= */
-
-.ranglisten-eintrag {
-    position: relative;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    border-radius: 10px;
-    min-height: 24px;
+    background-color: #2b2b2b;
+    border: 1px solid #414141;
+    border-radius: 7px;
+    color: #f2f2f2;
 }
 
 .ranglisten-eintrag strong {
@@ -327,54 +290,261 @@ body.dark .fang-datum {
 .ranglisten-arten {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
 }
 
-.ranglisten-punkte {
-    text-align: right;
-    white-space: nowrap;
-}
+  /* =========================
+   HAUPTNAVIGATION
+========================= */
 
-/* Platz 1 – Gold */
-.ranglisten-eintrag.platz-1 {
-    background: linear-gradient(
-        135deg,
-        #b8860b,
-        #ffd700,
-        #b8860b
-    );
-    color: #ffffff;
-}
-
-/* Platz 2 – Silber */
-.ranglisten-eintrag.platz-2 {
-    background: linear-gradient(
-        135deg,
-        #8f8f8f,
-        #e5e5e5,
-        #9a9a9a
-    );
-    color: #222222;
-}
-
-/* Platz 3 – Bronze */
-.ranglisten-eintrag.platz-3 {
-    background: linear-gradient(
-        135deg,
-        #8c4a20,
-        #cd7f32,
-        #8c4a20
-    );
-    color: #ffffff;
-}
-
-.ranglisten-info {
+.hauptnavigation {
     display: flex;
-    gap: 14px;
-    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background-color: #1b1b1b;
+    border-bottom: 1px solid #383838;
 }
 
-.ranglisten-info span {
-    white-space: nowrap;
+.hauptnavigation button {
+    flex: 1;
+    max-width: 170px;
+    padding: 10px 8px;
+    background-color: #2b2b2b;
+    color: #a7a7a7;
+    border: 1px solid #414141;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.hauptnavigation button:hover {
+    border-color: #697548;
+    color: #f2f2f2;
+}
+
+.hauptnavigation button.aktiv {
+    background-color: #697548;
+    border-color: #87965a;
+    color: #ffffff;
+}
+
+/* HANDY */
+
+@media (max-width: 600px) {
+
+    .hauptnavigation {
+        gap: 4px;
+        padding: 8px 6px;
+    }
+
+    .hauptnavigation button {
+        padding: 9px 4px;
+        font-size: 12px;
+    }
+
+}
+
+  /* =========================
+   SEITEN-NAVIGATION
+========================= */
+
+.seite-versteckt {
+    display: none !important;
+}
+
+/* =========================
+   STARTSEITE STATISTIKEN
+========================= */
+
+.start-statistiken {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.start-statistik {
+    background-color: #2b2b2b;
+    border: 1px solid #414141;
+    border-radius: 7px;
+    padding: 16px;
+    text-align: center;
+}
+
+.start-statistik-wert {
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    color: #87965a;
+}
+
+.start-statistik-label {
+    display: block;
+    margin-top: 5px;
+    color: #a7a7a7;
+    font-size: 13px;
+}
+
+
+/* HANDY */
+
+@media (max-width: 600px) {
+
+    .start-statistiken {
+        gap: 8px;
+    }
+
+    .start-statistik {
+        padding: 14px 8px;
+    }
+
+    .start-statistik-wert {
+        font-size: 23px;
+    }
+
+}
+
+/* =========================
+   STARTSEITE STATUS
+========================= */
+
+.start-status {
+    background-color: #292d25;
+    border: 1px solid #697548;
+    border-radius: 7px;
+    padding: 15px 16px;
+    margin-bottom: 22px;
+}
+
+.start-status-titel {
+    color: #87965a;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.start-status-zeitraum {
+    margin-top: 7px;
+    color: #a7a7a7;
+    font-size: 13px;
+}
+
+/* =========================
+   STARTSEITE TOP 3
+========================= */
+
+.start-rangliste {
+    margin-top: 22px;
+}
+
+.start-rangliste h2 {
+    margin-bottom: 12px;
+}
+
+.start-ranglisten-eintrag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 16px;
+    margin-bottom: 8px;
+
+    background-color: #2b2b2b;
+    border: 1px solid #414141;
+    border-radius: 7px;
+}
+
+.start-ranglisten-eintrag strong {
+    color: #f2f2f2;
+}
+
+.start-ranglisten-eintrag span {
+    color: #a7a7a7;
+    font-size: 13px;
+    text-align: right;
+}
+
+
+/* TOP 3 – dezente Akzente */
+
+.start-ranglisten-eintrag.platz-1 {
+    border-color: #8a7a45;
+}
+
+.start-ranglisten-eintrag.platz-2 {
+    border-color: #777777;
+}
+
+.start-ranglisten-eintrag.platz-3 {
+    border-color: #76563f;
+}
+
+
+/* HANDY */
+
+@media (max-width: 600px) {
+
+    .start-ranglisten-eintrag {
+        padding: 12px;
+    }
+
+    .start-ranglisten-eintrag span {
+        font-size: 12px;
+    }
+
+}
+
+/* =========================
+   GRÖSSTER FANG
+========================= */
+
+.start-groesster-fang {
+    margin-top: 22px;
+}
+
+.start-groesster-fang h2 {
+    margin-bottom: 12px;
+}
+
+#groessterFang {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    padding: 16px;
+
+    background-color: #292d25;
+    border: 1px solid #697548;
+    border-radius: 7px;
+}
+
+#groessterFang strong {
+    color: #f2f2f2;
+    font-size: 18px;
+}
+
+#groessterFang span {
+    color: #87965a;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: right;
+}
+
+
+/* HANDY */
+
+@media (max-width: 600px) {
+
+    #groessterFang {
+        padding: 14px 12px;
+    }
+
+    #groessterFang strong {
+        font-size: 16px;
+    }
+
+    #groessterFang span {
+        font-size: 13px;
+    }
+
 }
