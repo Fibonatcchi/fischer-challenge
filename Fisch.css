@@ -569,3 +569,110 @@ button:hover {
             invert(48%) sepia(97%) saturate(1200%) 
             hue-rotate(85deg) brightness(92%) contrast(105%);
 }
+
+/* =========================
+   TEILNEHMER KARTEN
+========================= */
+
+.teilnehmer-karte {
+    background-color: #2b2b2b;
+    border: 1px solid #414141;
+    border-radius: 7px;
+    padding: 18px;
+    margin-bottom: 12px;
+}
+
+.teilnehmer-karte h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #f2f2f2;
+}
+
+
+/* =========================
+   AKTIVER TEILNEHMER
+========================= */
+
+.teilnehmer-statistik {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.teilnehmer-statistik > div {
+    background-color: #222222;
+    border: 1px solid #414141;
+    border-radius: 7px;
+    padding: 12px;
+    text-align: center;
+}
+
+.teilnehmer-statistik span {
+    display: block;
+    color: #a7a7a7;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.teilnehmer-statistik strong {
+    display: block;
+    color: #87965a;
+    font-size: 17px;
+}
+
+
+/* =========================
+   GEFANGENE FISCHE
+========================= */
+
+.teilnehmer-faenge {
+    margin-top: 20px;
+}
+
+.teilnehmer-faenge h3 {
+    margin-bottom: 10px;
+    color: #f2f2f2;
+}
+
+.teilnehmer-fang {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 11px 13px;
+    margin-bottom: 7px;
+
+    background-color: #222222;
+    border: 1px solid #414141;
+    border-radius: 7px;
+}
+
+.teilnehmer-fang strong {
+    color: #f2f2f2;
+}
+
+.teilnehmer-fang span {
+    color: #87965a;
+    font-weight: bold;
+}
+
+
+/* HANDY */
+
+@media (max-width: 600px) {
+
+    .teilnehmer-karte {
+        padding: 15px;
+    }
+
+    .teilnehmer-statistik {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .teilnehmer-statistik > div {
+        padding: 10px;
+    }
+
+}

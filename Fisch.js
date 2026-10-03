@@ -387,9 +387,6 @@ const teilnehmerInput =
 const teilnehmerHinzufuegen =
     document.getElementById("teilnehmerHinzufuegen");
 
-const teilnehmerAuswahl =
-    document.getElementById("teilnehmerAuswahl");
-
 const fortschrittText =
     document.getElementById("fortschrittText");
 
@@ -634,8 +631,6 @@ function teilnehmerAnzeigen() {
 
     teilnehmerListe.innerHTML = "";
 
-    teilnehmerAuswahl.innerHTML = "";
-
     daten.teilnehmer.forEach(
         function(name) {
 
@@ -668,43 +663,10 @@ function teilnehmerAnzeigen() {
             teilnehmerListe.appendChild(button);
 
 
-            const option =
-                document.createElement("option");
-
-            option.value = name;
-
-            option.textContent = name;
-
-            teilnehmerAuswahl.appendChild(option);
-
         }
     );
 
-    if (aktuellerTeilnehmer) {
-
-        teilnehmerAuswahl.value =
-            aktuellerTeilnehmer;
-
-    }
-
 }
-
-
-/* =========================
-   AUSWAHL TEILNEHMER
-========================= */
-
-teilnehmerAuswahl.addEventListener(
-    "change",
-    function() {
-
-        aktuellerTeilnehmer =
-            teilnehmerAuswahl.value;
-
-        anzeigen();
-
-    }
-);
 
 
 /* =========================
@@ -1588,7 +1550,11 @@ resetButton.addEventListener(
 
 async function startApp() {
 
+    console.log("TEST 1: startApp gestartet");
+
     await challengeLaden();
+
+    console.log("TEST 2: challengeLaden fertig");
 
     challengeInfoAnzeigen();
 
@@ -1596,9 +1562,19 @@ async function startApp() {
 
     await teilnehmerAusSupabaseLaden();
 
+    console.log("TEST 3: Teilnehmer geladen");
+
     await fischartenAusSupabaseLaden();
 
+    console.log("TEST 4: Fischarten geladen");
+
     await faengeAusSupabaseLaden();
+
+    console.log("TEST 5: Fänge geladen");
+
+    anzeigen();
+
+    console.log("TEST 6: anzeigen() wurde aufgerufen");
 
     anzeigen();
 
@@ -1608,7 +1584,9 @@ async function startApp() {
   
 }
 
-alert("Revision S");
+alert("TEST Fisch.js wird geladen");
+
+console.log("FISCH.JS ERREICHT TESTSTELLE");
 
 startApp();
 

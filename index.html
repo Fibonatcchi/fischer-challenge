@@ -35,38 +35,19 @@
 
     <main>
 
+      <div id="teilnehmerListe"
+         class="teilnehmer-liste">
+      </div>
+      
         <!-- Teilnehmer -->
 
-        <section class="bereich"
-          id="seiteTeilnehmer">
-
-            <h2>Teilnehmer</h2>
-
-            <div id="teilnehmerListe" class="teilnehmer-liste"></div>
-
-            <div class="neuer-teilnehmer">
-
-                <input
-                    type="text"
-                    id="teilnehmerInput"
-                    placeholder="Name eingeben"
-                >
-
-                <button id="teilnehmerHinzufuegen">
-                    Teilnehmer hinzufügen
-                </button>
-
-            </div>
-
-          <!-- Teilnehmer -->
-
-<section class="bereich"
+<section class="bereich seite-versteckt"
   id="seiteTeilnehmer">
 
-    <h2>Teilnehmer</h2>
+  <div class="teilnehmer-karte"
 
-    <div id="teilnehmerListe" class="teilnehmer-liste"></div>
-
+    <h2>Teilnehmer hinzufügen</h2>
+  
     <div class="neuer-teilnehmer">
 
         <input
@@ -79,49 +60,63 @@
             Teilnehmer hinzufügen
         </button>
 
+      </div>
+
     </div>
-
-
+  
     <!-- Aktueller Teilnehmer -->
+
+  <div class="teilnehmer-karte">
 
     <div class="aktiver-teilnehmer">
 
         <h2>Aktiver Teilnehmer</h2>
 
-        <select id="teilnehmerAuswahl"></select>
-
         <div class="teilnehmer-statistik">
 
             <div>
                 <span>🏆 Aktueller Rang</span>
-                <strong id="teilnehmerRang">-</strong>
+
+                <strong id="teilnehmerRang">
+                    -
+                </strong>
             </div>
+
 
             <div>
                 <span>⭐ Punkte</span>
-                <strong id="teilnehmerPunkte">0</strong>
+
+                <strong id="teilnehmerPunkte">
+                    0
+                </strong>
             </div>
+
 
             <div>
                 <span>🐟 Gefangene Arten</span>
-                <strong id="teilnehmerArten">0</strong>
+
+                <strong id="teilnehmerArten">
+                    0
+                </strong>
             </div>
 
         </div>
+
 
         <div class="teilnehmer-faenge">
 
             <h3>Gefangene Fische</h3>
 
-            <div id="teilnehmerFangliste"></div>
+            <div id="teilnehmerFangliste">
+            </div>
 
         </div>
 
     </div>
 
+  </div>
+
 </section>
-          
-        </section>
 
 
         <!-- Fortschritt -->
