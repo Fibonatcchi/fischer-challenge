@@ -767,8 +767,8 @@ bild.classList.add("fisch-bild");
 
 bild.innerHTML = `
     <img
-        src="bilder/Hecht.png"
-        alt="Hecht"
+        src="bilder/${fisch.name}.png"
+        alt="${fisch.name}"
         class="fisch-silhouette"
     >
 `;
