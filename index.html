@@ -58,18 +58,69 @@
 
             </div>
 
-        </section>
+          <!-- Teilnehmer -->
+
+<section class="bereich"
+  id="seiteTeilnehmer">
+
+    <h2>Teilnehmer</h2>
+
+    <div id="teilnehmerListe" class="teilnehmer-liste"></div>
+
+    <div class="neuer-teilnehmer">
+
+        <input
+            type="text"
+            id="teilnehmerInput"
+            placeholder="Name eingeben"
+        >
+
+        <button id="teilnehmerHinzufuegen">
+            Teilnehmer hinzufügen
+        </button>
+
+    </div>
 
 
-        <!-- Aktueller Teilnehmer -->
+    <!-- Aktueller Teilnehmer -->
 
-        <section class="bereich"
-          id="seiteAktiverTeilnehmer">
+    <div class="aktiver-teilnehmer">
 
-            <h2>Aktiver Teilnehmer</h2>
+        <h2>Aktiver Teilnehmer</h2>
 
-            <select id="teilnehmerAuswahl"></select>
+        <select id="teilnehmerAuswahl"></select>
 
+        <div class="teilnehmer-statistik">
+
+            <div>
+                <span>🏆 Aktueller Rang</span>
+                <strong id="teilnehmerRang">-</strong>
+            </div>
+
+            <div>
+                <span>⭐ Punkte</span>
+                <strong id="teilnehmerPunkte">0</strong>
+            </div>
+
+            <div>
+                <span>🐟 Gefangene Arten</span>
+                <strong id="teilnehmerArten">0</strong>
+            </div>
+
+        </div>
+
+        <div class="teilnehmer-faenge">
+
+            <h3>Gefangene Fische</h3>
+
+            <div id="teilnehmerFangliste"></div>
+
+        </div>
+
+    </div>
+
+</section>
+          
         </section>
 
 

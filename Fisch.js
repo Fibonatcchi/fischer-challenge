@@ -1231,6 +1231,136 @@ eintrag.innerHTML =
 }
 
 /* =========================
+   AKTUELLEN TEILNEHMER ANZEIGEN
+========================= */
+
+function aktuellerTeilnehmerAnzeigen() {
+
+  console.log("AKTUELLER TEILNEHMER WIRD ANGEZEIGT");
+
+    const rangElement =
+        document.getElementById("teilnehmerRang");
+
+    const punkteElement =
+        document.getElementById("teilnehmerPunkte");
+
+    const artenElement =
+        document.getElementById("teilnehmerArten");
+
+    const fanglisteElement =
+        document.getElementById("teilnehmerFangliste");
+
+    if (
+        !rangElement ||
+        !punkteElement ||
+        !artenElement ||
+        !fanglisteElement
+    ) {
+        return;
+    }
+
+    if (!aktuellerTeilnehmer) {
+
+        rangElement.textContent = "-";
+        punkteElement.textContent = "0";
+        artenElement.textContent = "0";
+        fanglisteElement.innerHTML =
+            "<p>Noch kein Teilnehmer ausgewählt.</p>";
+
+        return;
+    }
+
+    /* Punkte berechnen */
+    const punkte =
+        punkteBerechnen();
+
+    const aktuellePunkte =
+        punkte[aktuellerTeilnehmer] || 0;
+
+
+    /* Rang berechnen */
+    const ergebnisse =
+        daten.teilnehmer.map(function(name) {
+
+            return {
+                name: name,
+                punkte: punkte[name] || 0
+            };
+
+        });
+
+    ergebnisse.sort(function(a, b) {
+
+        return b.punkte - a.punkte;
+
+    });
+
+    const rang =
+        ergebnisse.findIndex(function(ergebnis) {
+
+            return ergebnis.name === aktuellerTeilnehmer;
+
+        }) + 1;
+
+
+    /* Gefangene Arten */
+    const faenge =
+        daten.faenge[aktuellerTeilnehmer] || [];
+
+    const anzahlArten =
+        faenge.length;
+
+
+    /* Werte anzeigen */
+    rangElement.textContent =
+        rang + ". Platz";
+
+    punkteElement.textContent =
+        aktuellePunkte + " Punkte";
+
+    artenElement.textContent =
+        anzahlArten;
+
+
+    /* Fangliste */
+    fanglisteElement.innerHTML = "";
+
+    if (faenge.length === 0) {
+
+        fanglisteElement.innerHTML =
+            "<p>Noch keine Fänge eingetragen.</p>";
+
+        return;
+    }
+
+
+    faenge.forEach(function(fang) {
+
+        const eintrag =
+            document.createElement("div");
+
+        eintrag.classList.add(
+            "teilnehmer-fang"
+        );
+
+        eintrag.innerHTML =
+            "<strong>" +
+            fang.fisch +
+            "</strong>" +
+            "<span>" +
+            fang.laenge +
+            " cm" +
+            "</span>";
+
+        fanglisteElement.appendChild(
+            eintrag
+        );
+
+    });
+
+}
+
+/* =========================
    GRÖSSTER FANG ANZEIGEN
 ========================= */
 
@@ -1387,6 +1517,10 @@ function anzeigen() {
     startRanglisteAnzeigen();
 
     groesstenFangAnzeigen();
+
+  console.log("TEST: anzeigen() läuft");
+
+    aktuellerTeilnehmerAnzeigen();
 
 }
 
